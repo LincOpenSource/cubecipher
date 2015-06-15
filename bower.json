@@ -22,6 +22,7 @@
     "src",
     "talks",
     "test",
-    "Makefile"
+    "Makefile",
+    "Vagrantfile"
   ]
 }
