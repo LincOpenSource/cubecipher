@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CubeCipher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cosmo/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="rel/cubecipher-1.0.0-min.js"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span>CubeCipher</span></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a target="_blank" href="https://www.npmjs.com/package/cubecipher">NPM</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://github.com/LincOpenSource/cubecipher">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="logo\logo.png" class="img-responsive">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <h2>Secure Encryption Implementation</h2>
+                    <p class="lead">CubeCipher is a novel implementation of multiple ciphers to harden security. It encrypts data with Salsa 20, AES, and Twofish, ensuring that even if one of the ciphers is compromised the encrypted data is not exposed. The implementation also derives keys with scrypt to protect against rainbow tables and then authenticates with HMAC to protect against adaptive chosen-ciphertext attacks.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Browser Demo</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <form role="form">
+                        <div class="form-group">
+                            <label class="control-label" for="password">Password</label>
+                            <input class="form-control" id="password" type="password" value="password">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="data">Data</label>
+                            <textarea class="form-control" id="data" rows="8">Some Important Data</textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2" id="progress-summary">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-default btn-block" id="btn-encrypt">Encrypt</button>
+                    <button class="btn btn-default btn-block" id="btn-decrypt">Decrypt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>How to Use</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                   <p>Encryption</p>
+                    <pre><code>cubecipher.encrypt ({
+    data:          new cubecipher.Buffer('Some Important Data'),
+    key:           new cubecipher.Buffer('password'),
+    progress_hook: function (obj) { /* ... */ }
+
+}, function(err, buff) {
+
+    if (! err) {
+        var ciphertext = buff.toString('hex');
+    }
+});
+</code></pre><p>Decryption</p>
+                    <pre><code>cubecipher.decrypt ({
+
+    data:          new cubecipher.Buffer(ciphertext, "hex"),
+    key:           new cubecipher.Buffer('password'),
+    progress_hook: function (obj) { /* ... */ }
+
+}, function (err, buff) {
+
+    if (! err) {
+        console.log(buff.toString());
+    }
+
+});
+
+var plaintext = buff.toString();
+</code></pre>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+    <footer class="section section-primary">
+        <div class="container">
+            <div class="row">
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript">
+        (function () {
+            var __slice = [].slice;
+
+            window.iced = {
+                Deferrals: (function () {
+                    function _Class(_arg) {
+                        this.continuation = _arg;
+                        this.count = 1;
+                        this.ret = null;
+                    }
+
+                    _Class.prototype._fulfill = function () {
+                        if (!--this.count) {
+                            return this.continuation(this.ret);
+                        }
+                    };
+
+                    _Class.prototype.defer = function (defer_params) {
+                        var _this = this;
+                        ++this.count;
+                        return function () {
+                            var inner_params, _ref;
+                            inner_params = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+                            if (defer_params != null) {
+                                if ((_ref = defer_params.assign_fn) != null) {
+                                    _ref.apply(null, inner_params);
+                                }
+                            }
+                            return _this._fulfill();
+                        };
+                    };
+
+                    return _Class;
+
+                })(),
+                findDeferral: function () {
+                    return null;
+                },
+                trampoline: function (_fn) {
+                    return _fn();
+                }
+            };
+            window.__iced_k = window.__iced_k_noop = function () {};
+
+            $(function () {
+                var input_change, progress, progress_hook, reset_progress, textarea_auto,
+                    _this = this;
+                textarea_auto = function (ta) {
+                    ta.style.overflow = 'hidden';
+                    ta.style.height = 0;
+                    return ta.style.height = "" + (25 + Math.min(600, Math.max(ta.scrollHeight, 50))) + "px";
+                };
+                input_change = function () {
+                    var k, v;
+                    textarea_auto($('#data')[0]);
+                    v = $('#data').val();
+                    k = $('#password').val();
+                    $('#btn-encrypt, #btn-decrypt').prop('disabled', true);
+                    if (v && v.length && k && k.length) {
+                        $('#btn-encrypt').prop('disabled', false);
+                        if ((v.match(/^[a-f0-9]+$/i)) && !(v.length % 2)) {
+                            return $('#btn-decrypt').prop('disabled', false);
+                        }
+                    }
+                };
+                progress = [];
+                reset_progress = function (msg) {
+                    progress = [];
+                    return $("#progress-summary").html(msg || '');
+                };
+                progress_hook = function (p) {
+                    var h, pr, _i, _len;
+                    if (progress.length && (progress[progress.length - 1].what === p.what)) {
+                        progress[progress.length - 1] = p;
+                    } else {
+                        progress.push(p);
+                    }
+                    h = "";
+                    for (_i = 0, _len = progress.length; _i < _len; _i++) {
+                        pr = progress[_i];
+                        h += "<li>" + pr.what + " " + pr.i + "/" + pr.total + "</li>";
+                    }
+                    return $("#progress-summary").html(h);
+                };
+                $('#data').on('change', function () {
+                    return input_change();
+                });
+                $('#data').on('keyup', function () {
+                    return input_change();
+                });
+                $('#password').on('change', function () {
+                    return input_change();
+                });
+                $('#password').on('keyup', function () {
+                    return input_change();
+                });
+                $('#btn-encrypt').on('click', function () {
+                    var data, err, hex, key, out, ___iced_passed_deferral, __iced_deferrals, __iced_k;
+                    __iced_k = __iced_k_noop;
+                    ___iced_passed_deferral = iced.findDeferral(arguments);
+                    reset_progress();
+                    $('#btn-encrypt, #btn-decrypt').prop('disabled', true);
+                    data = new cubecipher.Buffer($('#data').val());
+                    key = new cubecipher.Buffer($('#password').val());
+                    (function (__iced_k) {
+                        __iced_deferrals = new iced.Deferrals(__iced_k, {
+                            parent: ___iced_passed_deferral,
+                            filename: "iced/site.iced"
+                        });
+                        cubecipher.encrypt({
+                            data: data,
+                            key: key,
+                            rng: cubecipher.rng,
+                            progress_hook: progress_hook
+                        }, __iced_deferrals.defer({
+                            assign_fn: (function () {
+                                return function () {
+                                    err = arguments[0];
+                                    return out = arguments[1];
+                                };
+                            })(),
+                            lineno: 47
+                        }));
+                        __iced_deferrals._fulfill();
+                    })(function () {
+                        (function (__iced_k) {
+                            __iced_deferrals = new iced.Deferrals(__iced_k, {
+                                parent: ___iced_passed_deferral,
+                                filename: "iced/site.iced"
+                            });
+                            setTimeout(__iced_deferrals.defer({
+                                lineno: 48
+                            }), 5);
+                            __iced_deferrals._fulfill();
+                        })(function () {
+                            if (err) {
+                                reset_progress("<li>" + err + "</li>");
+                            } else {
+                                hex = out.toString('hex');
+                                $("#data").val(hex);
+                                textarea_auto($("#data")[0]);
+                            }
+                            return input_change();
+                        });
+                    });
+                });
+                $('#btn-decrypt').on('click', function () {
+                    var data, err, key, out, txt, ___iced_passed_deferral, __iced_deferrals, __iced_k;
+                    __iced_k = __iced_k_noop;
+                    ___iced_passed_deferral = iced.findDeferral(arguments);
+                    reset_progress();
+                    $('#btn-encrypt, #btn-decrypt').prop('disabled', true);
+                    data = new cubecipher.Buffer($('#data').val(), 'hex');
+                    key = new cubecipher.Buffer($('#password').val());
+                    (function (__iced_k) {
+                        __iced_deferrals = new iced.Deferrals(__iced_k, {
+                            parent: ___iced_passed_deferral,
+                            filename: "iced/site.iced"
+                        });
+                        cubecipher.decrypt({
+                            data: data,
+                            key: key,
+                            progress_hook: progress_hook
+                        }, __iced_deferrals.defer({
+                            assign_fn: (function () {
+                                return function () {
+                                    err = arguments[0];
+                                    return out = arguments[1];
+                                };
+                            })(),
+                            lineno: 66
+                        }));
+                        __iced_deferrals._fulfill();
+                    })(function () {
+                        (function (__iced_k) {
+                            __iced_deferrals = new iced.Deferrals(__iced_k, {
+                                parent: ___iced_passed_deferral,
+                                filename: "iced/site.iced"
+                            });
+                            setTimeout(__iced_deferrals.defer({
+                                lineno: 67
+                            }), 5);
+                            __iced_deferrals._fulfill();
+                        })(function () {
+                            if (err) {
+                                reset_progress("<li>" + err + "</li>");
+                            } else {
+                                txt = out.toString();
+                                $("#data").val(txt);
+                                textarea_auto($("#data")[0]);
+                            }
+                            return input_change();
+                        });
+                    });
+                });
+                return textarea_auto($("#data")[0]);
+            });
+
+        }).call(this);
+    </script>
+</body>
+
+</html>
