@@ -1,0 +1,27 @@
+{
+  "name": "cubecipher",
+  "version": "1.0.0",
+  "homepage": "https://github.com/LincOpenSource/cubecipher",
+  "author": "afzaalace",
+  "description": "Novel implementation of multiple ciphers to harden security.",
+  "main": "browser/cubecipher.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "*.html",
+    "codo",
+    "contrib",
+    "dev",
+    "ext",
+    "lib",
+    "logo",
+    "ref",
+    "rel",
+    "site",
+    "spec",
+    "src",
+    "talks",
+    "test",
+    "Makefile"
+  ]
+}
